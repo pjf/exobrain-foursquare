@@ -90,9 +90,8 @@ method foursquare_api($path, %args) {
 
     # Make our call, and decode the resulting JSON.
 
-    return $self->json->decode(
-        $self->mech->get("$base/$path?$arguments")
-    );
+    $self->mech->get("$base/$path?$arguments");
+    return $self->json->decode( $self->mech->content );
 
 }
 
