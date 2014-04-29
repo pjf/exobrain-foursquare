@@ -1,6 +1,7 @@
 package Exobrain::Agent::Foursquare;
 use Moose::Role;
 use Method::Signatures;
+use WWW::Mechanize;
 
 with 'Exobrain::Agent';
 
