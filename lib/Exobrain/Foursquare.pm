@@ -25,7 +25,8 @@ sub setup {
 
     say "Welcome to the Exobrain::Foursquare setup process.";
     say "To complete setup, we'll need a valid FourSquare auth token";
-    say "You can yoink this out of the API explorer at ( TODO - ADD URL )";
+    say "You can yoink this out of the API explorer at";
+    say 'https://developer.foursquare.com/docs/explore';
 
     print "Auth token: ";
     chomp( my $token = <STDIN> );
