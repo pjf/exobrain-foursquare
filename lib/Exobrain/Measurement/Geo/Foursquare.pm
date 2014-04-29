@@ -34,7 +34,7 @@ around BUILDARGS => func ($orig!, $class!, :$checkin?, ...) {
 
         my $user = $checkin->{user}{id};
 
-        return $class->orig(
+        return $class->$orig(
             source    => 'Foursquare',
             timestamp => $checkin->{createdAt},
             is_me     =>  ($checkin->{user}{relationship} eq 'self'),
