@@ -1,6 +1,8 @@
 package Exobrain::Foursquare;
 use Moose;
 use Exobrain::Config;
+use JSON::Any;
+use Try::Tiny;
 use feature qw(say);
 
 # ABSTRACT: Foursquare components for Exobrain
@@ -34,10 +36,16 @@ sub setup {
     # Check to see if we auth okay.
 
     my $mech = WWW::Mechanize->new( autocheck => 1 );
+    my $json = JSON::Any->new;
 
     $mech->get("$FOURSQUARE_API/checkins/recent?oauth_token=$token&v=20130425");
 
-    # TODO : Inspect content to ensure success
+    my $status = $json->decode($mech->content);
+
+    if ($status->{meta}{code} != 200) {
+        my $reason = $status->{meta}{errorDetail} || "Unknown error, sorry!";
+        die "Auth failed! $reason\n";
+    }
     
     say "\nThanks! Writing configuration...";
 
